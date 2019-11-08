@@ -5,7 +5,7 @@
       <div class="col s5">
         <table class="striped highlight black-text">
           <thead>
-            <th>Name</th>
+            <th>Lista de assignaturas</th>
             </thead>
           <tbody>
             <tr *ngFor="let subjects of listasubjects">
@@ -20,6 +20,46 @@
             </tr>
           </tbody>
         </table>
+        <table class="striped highlight black-text">
+                <thead>
+                  <th>Lista estudiantes telecos</th>
+                  </thead>
+                <tbody>
+                  <tr *ngFor="let students of listatelecos">
+                    <td>{{students.name }}</td>
+      
+                                     
+                  </tr>
+                </tbody>
+         </table>
+         <table class="striped highlight black-text">
+                <thead>
+                  <th>Lista estudiantes telematica</th>
+                  </thead>
+                <tbody>
+                  <tr *ngFor="let students of listatel">
+                    <td>{{students.name }}</td>
+      
+                                     
+                  </tr>
+                </tbody>
+         </table>
+         <table class="striped highlight black-text">
+                <thead>
+                  <th>Lista estudiantes aeros</th>
+                  </thead>
+                <tbody>
+                  <tr *ngFor="let students of listaaeros">
+                    <td>{{students.name }}</td>
+      
+                                     
+                  </tr>
+                </tbody>
+         </table>
+
+
+
+
       </div>
       <div class="col s7">
      <div class="jumbotron">
@@ -51,6 +91,17 @@
             <div class="card-content">
                 <h5>Crear alumno</h5>
                 <form #crearAl="ngForm" [formGroup]="crearAlForm" (ngSubmit)="onSubmit2(crearAl)">
+                        
+                  
+                    <div class="form-group">
+                                <label>id</label>
+                                <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.id.errors.required">ID!</div>
+                                    </div>
+                            </div>
+
+                   
                     <div class="form-group">
                         <label>name</label>
                         <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
@@ -75,6 +126,14 @@
                             <div *ngIf="f.phones.errors.required">El phone es obligatorio!</div>
                             </div>
                     </div>
+
+                    <div class="form-group">
+                            <label>Carrera</label>
+                            <input type="text" formControlName="carrera" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.carrera.errors }" />
+                            <div *ngIf="submitted && f.carrera.errors" class="invalid-feedback">
+                                <div *ngIf="f.carrera.errors.required"> que carrera?!</div>
+                                </div>
+                        </div>
 
                     
                     <div class="form-group">

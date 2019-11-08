@@ -111,7 +111,20 @@ AñadirStudent(crearAlumn: NgForm){
 
 }
 
+
+
+
+
+
+
+
+
 get f() { return this.crearAlumnForm.controls; }
+
+
+
+
+
 
 
   }

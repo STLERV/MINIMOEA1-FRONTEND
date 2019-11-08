@@ -2,15 +2,18 @@ export class Student {
  
     constructor()
     {
-        this._id = '';
+        this.id = '';
         this.name = '';
         this.adress = '';
         this.phones = [];
+        this.carrera = '';
     }
  
     
-    _id: string;
+    id: string;
     name: string;
     adress: string;
     phones: [];
+    carrera: string;
+    //aa
 }

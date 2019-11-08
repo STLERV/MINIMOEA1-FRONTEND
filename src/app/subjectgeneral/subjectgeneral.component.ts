@@ -15,13 +15,19 @@ declare var M: any;
 export class SubjectgeneralComponent implements OnInit {
 
 
+
 listasubjects: Subjects[];
+listastudents: Student[];
 crearAsiForm: FormGroup;
 submited = false;
 subjectnew: Subjects;
 alumnonew: Student;
 submited2 = false;
 crearAlForm: FormGroup;
+
+protected  listaaeros: Student[] = [];
+protected listatelecos: Student [] = [];
+protected listatel: Student [] = [];
 
   constructor(private frombuilder: FormBuilder, private escuelaservice: ServiceService, private router: Router) { }
 
@@ -33,11 +39,16 @@ crearAlForm: FormGroup;
 
     })
 
+    this.getStudents();
+    
+
     this.crearAlForm  = this.frombuilder.group({
 
+      id: ['',Validators.required],
       name: ['', Validators.required],
       adress: ['', Validators.required],
       phones: ['', Validators.required],
+      carrera: ['', Validators.required],
 
     })
 
@@ -78,9 +89,11 @@ this.getSubjects();
 
   postStudent(crearAl: NgForm){
     this.alumnonew = new Student();
+    this.alumnonew.id = crearAl.value.id;
     this.alumnonew.name = crearAl.value.name;
     this.alumnonew.adress = crearAl.value.adress;
     this.alumnonew.phones = crearAl.value.phones;
+    this.alumnonew.carrera = crearAl.value.carrera;
 
     this.escuelaservice.postStudent(this.alumnonew)
     .subscribe(res => {
@@ -126,5 +139,68 @@ this.getSubjects();
 
 
 
+getStudents(){
 
-}
+    this.escuelaservice.getStudents()
+
+    .subscribe(res => 
+      {
+        this.listastudents = res as Student[];
+
+        this.getAeros(this.listastudents);
+        this.getTelematicos(this.listastudents);        
+        this.geTelecos(this.listastudents);        
+
+      })
+
+
+  }
+
+   getAeros(listastudents : Student[]){
+ 
+    
+    listastudents.forEach(element =>{
+ 
+   if (element.carrera == 'aeros')
+    {
+      this.listaaeros.push(element);
+ 
+ 
+    }
+   }
+     )};
+
+
+   getTelematicos(listastudents : Student[]){
+ 
+   this.listastudents.forEach(element =>{
+ 
+    if (element.carrera == 'telematica')
+    {
+   this.listatel.push(element)
+ 
+ 
+    }});
+
+    
+   
+   
+  
+
+
+
+  }
+  
+  geTelecos(listastudents : Student[]){
+ 
+    this.listastudents.forEach(element =>{
+  
+     if (element.carrera == 'telecos')
+     {
+    this.listatelecos.push(element)
+  
+  
+     }});
+    }
+
+  }
